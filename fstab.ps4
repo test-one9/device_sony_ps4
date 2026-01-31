@@ -1,0 +1,5 @@
+# Android fstab file.
+#<src>                                  <mnt_point>  <type>  <mnt_flags>      <fs_mgr_flags>
+/dev/block/sda1                         /system      ext4    ro,barrier=1     wait
+/dev/block/sda2                         /data        ext4    noatime,nosuid   wait,check
+/dev/block/sda3                         /cache       ext4    noatime,nosuid   wait,check
