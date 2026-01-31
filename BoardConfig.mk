@@ -22,3 +22,5 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3221225472
 
 # Android TV Specifics
 TARGET_USES_64_BIT_BINDER := true
+# System properties
+TARGET_SYSTEM_PROP += device/sony/ps4/system.prop
