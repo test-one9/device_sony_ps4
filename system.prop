@@ -1,0 +1,12 @@
+# Display
+ro.sf.lcd_density=320
+debug.drm.mode.force=1920x1080
+
+# Performance
+dalvik.vm.heapsize=512m
+dalvik.vm.heapgrowthlimit=256m
+debug.hwui.renderer=opengl
+
+# Media
+media.stagefright.enable-player=true
+media.stagefright.enable-http=true
