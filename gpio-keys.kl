@@ -1,0 +1,33 @@
+# Key Layout for PS4 Controller (Android TV)
+# Based on standard HID scan codes for Sony DualShock 4
+
+# Directional Pad (D-Pad)
+key 103   DPAD_UP
+key 108   DPAD_DOWN
+key 105   DPAD_LEFT
+key 106   DPAD_RIGHT
+
+# Main Action Buttons
+key 304   BUTTON_A          # Cross (Select/Enter)
+key 305   BUTTON_B          # Circle (Back)
+key 307   BUTTON_X          # Square
+key 308   BUTTON_Y          # Triangle
+
+# Navigation & Menu
+key 314   BACK              # Share button
+key 315   HOME              # PS Button
+key 312   MENU              # Options button
+
+# Triggers and Shoulders
+key 310   BUTTON_L1
+key 311   BUTTON_R1
+key 312   BUTTON_L2
+key 313   BUTTON_R2
+
+# Thumbstick Clicks
+key 317   BUTTON_THUMBL
+key 318   BUTTON_THUMBR
+
+# Volume Controls (Optional mapping for convenience)
+key 115   VOLUME_UP
+key 114   VOLUME_DOWN
