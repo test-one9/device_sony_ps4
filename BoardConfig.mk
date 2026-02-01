@@ -8,6 +8,10 @@ TARGET_CPU_VARIANT := generic
 TARGET_KERNEL_ARCH := x86_64
 BOARD_KERNEL_IMAGE_NAME := bzImage
 TARGET_KERNEL_SOURCE := kernel/sony/ps4
+TARGET_NO_BOOTLOADER := true
+BOARD_KERNEL_CMDLINE := androidboot.hardware=ps4 androidboot.selinux=permissive qemu=1 androidboot.console=tty0
+# Note: "qemu=1" is often used in x86 builds to trigger software rendering fallbacks if GPU init fails, 
+# but we aim for hardware acceleration below.
 # Graphics - AMD Custom GCN requires Mesa3D with RadeonSI
 BOARD_GPU_DRIVERS := radeonsi
 BOARD_USE_VULKAN := true
