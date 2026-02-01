@@ -4,11 +4,10 @@ TARGET_ARCH := x86_64
 TARGET_ARCH_VARIANT := x86_64
 TARGET_CPU_VARIANT := generic
 
-# Kernel
-# Removed prebuilt kernel definitions. 
-# Ensure the kernel is provided externally or via a source build.
-TARGET_NO_KERNEL := true
-
+# kernel
+TARGET_KERNEL_ARCH := x86_64
+BOARD_KERNEL_IMAGE_NAME := bzImage
+TARGET_KERNEL_SOURCE := kernel/sony/ps4
 # Graphics - AMD Custom GCN requires Mesa3D with RadeonSI
 BOARD_GPU_DRIVERS := radeonsi
 BOARD_USE_VULKAN := true
