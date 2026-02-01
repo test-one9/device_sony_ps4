@@ -7,6 +7,9 @@ TARGET_CPU_VARIANT := generic
 # kernel
 TARGET_KERNEL_ARCH := x86_64
 BOARD_KERNEL_IMAGE_NAME := bzImage
+BOARD_CUSTOM_BOOTIMG := true
+BOARD_CUSTOM_BOOTIMG_MK := device/sony/ps4/mkbootimg.mk
+NEED_KERNEL_MODULE_ROOT := true
 TARGET_KERNEL_SOURCE := kernel/sony/ps4
 TARGET_NO_BOOTLOADER := true
 BOARD_KERNEL_CMDLINE := androidboot.hardware=ps4 androidboot.selinux=permissive androidboot.console=tty0
