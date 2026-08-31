@@ -16,24 +16,22 @@
 
 LOCAL_PATH := $(call my-dir)
 
-# PS4 uses a custom Linux/kexec based boot sequence rather than standard Android fastboot.
-# This mkbootimg.mk overrides the default target to package the bzImage (kernel) 
-# and ramdisk into a format suitable for the PS4 Linux loaders (e.g., Orbis/Payloads).
+# Target paths for boot components
+PS4_BOOT_DIR := $(LOCAL_PATH)/boot
+PS4_DISTRO_ARCHIVE := $(PS4_BOOT_DIR)/psxitarch.tar.gz
 
-INTERNAL_BOOTIMAGE_ARGS := 	--kernel $(PRODUCT_OUT)/kernel 	--ramdisk $(PRODUCT_OUT)/ramdisk.img 	--cmdline "$(BOARD_KERNEL_CMDLINE)" 	--base $(BOARD_KERNEL_BASE) 	--pagesize $(BOARD_KERNEL_PAGESIZE)
-
-ifeq ($(BOARD_USES_RECOVERY_AS_BOOT),true)
-INTERNAL_BOOTIMAGE_ARGS += --recovery_as_boot
-endif
-
-ifdef BOARD_INCLUDE_DTB
-INTERNAL_BOOTIMAGE_ARGS += --dtb $(PRODUCT_OUT)/dtb.img
-endif
-
+# Include the custom distribution archive into the recovery/boot build process
 INSTALLED_BOOTIMAGE_TARGET := $(PRODUCT_OUT)/boot.img
 
-$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(BOOTIMAGE_EXTRA_DEPS)
-	$(call pretty,"Target boot image: $@")
-	$(hide) $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(INTERNAL_MKBOOTIMG_VERSION_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
-	@echo "==== PS4 Boot Image Built: $@ ===="
-	@echo "For PS4 kexec injection, utilize bzImage and ramdisk.img directly or pack via payload."
+$(INSTALLED_BOOTIMAGE_TARGET): $(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_FILES) $(PS4_DISTRO_ARCHIVE)
+	@echo "--- Making PS4 kexec boot image with psxitarch distro ---"
+	$(hide) mkdir -p $(PRODUCT_OUT)/tmp_boot
+	$(hide) cp $(PRODUCT_OUT)/kernel $(PRODUCT_OUT)/tmp_boot/bzImage
+	$(hide) cp $(PRODUCT_OUT)/ramdisk.img $(PRODUCT_OUT)/tmp_boot/initrd.img
+	$(hide) cp $(PS4_DISTRO_ARCHIVE) $(PRODUCT_OUT)/tmp_boot/psxitarch.tar.gz
+	# Combine targets using specialized packaging scripts or mkbootimg arguments
+	$(MKBOOTIMG) $(INTERNAL_BOOTIMAGE_ARGS) $(BOARD_MKBOOTIMG_ARGS) --output $@
+	@echo "--- Made PS4 boot image: $@ ---"
+
+.PHONY: ps4-bootimage
+ps4-bootimage: $(INSTALLED_BOOTIMAGE_TARGET)
